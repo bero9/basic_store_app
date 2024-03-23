@@ -20,14 +20,17 @@ class Api {
       @required String? token}) async {
     Map<String, String> headers = {};
     if (token != null) {
-      headers.addAll({
-        'Authorization' : 'Bearer $token'
-      });
+      headers.addAll({'Authorization': 'Bearer $token'});
     }
     http.Response response =
         await http.post(Uri.parse(url), body: body, headers: headers);
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = jsonDecode(response.body);
 
-    Map<String, dynamic> data = jsonDecode(response.body);
-    return data;
+      return data;
+    } else {
+      throw Exception(
+          'there is a problem with status code ${response.statusCode} with body ${jsonDecode(response.body)}');
+    }
   }
 }
