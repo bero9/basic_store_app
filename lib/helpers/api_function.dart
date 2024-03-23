@@ -20,7 +20,9 @@ class Api {
       @required String? token}) async {
     Map<String, String> headers = {};
     if (token != null) {
-      headers.addAll({});
+      headers.addAll({
+        'Authorization' : 'Bearer $token'
+      });
     }
     http.Response response =
         await http.post(Uri.parse(url), body: body, headers: headers);
