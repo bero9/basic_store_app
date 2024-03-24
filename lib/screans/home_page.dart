@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../common_cart/TProductCardVertical.dart';
+import '../common_cart/grid_layout.dart';
+import '../common_cart/sizes.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -24,8 +28,17 @@ class HomePage extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: const Center(
-        child: Text('Home Page'),
+      body:  SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(TSize.Defaultspacing),
+          child: Column(
+            children: [
+              TGridLayout(
+                  itemCount: 4,
+                  itemBuilder: (_, index) => const TProductCardVertical())
+            ],
+          ),
+        ),
       ),
     );
   }
